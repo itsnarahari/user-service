@@ -57,9 +57,6 @@ public class NotificationService {
     @Value("${app.auth.resetPasswordLink}")
     private String resetPasswordLink;
 
-    @Value("${user.login.link}")
-    private String loginLink;
-
     @Async
     public void email(String email, String actionType, User user) {
         Notification notification = null;
@@ -93,8 +90,8 @@ public class NotificationService {
                 Template template = handlebars.compile("resetPasswordLink-template");
                 templateString = template.apply(templateData);
             } else if(actionType.equalsIgnoreCase("PASSWORD_CHANGE_SUCCESS")){
-                templateData.put("link", loginLink);
-                Template template = handlebars.compile("passwordChangeSuccess-template");
+
+                Template template = handlebars.compile("resetPasswordLink-template");
                 templateString = template.apply(templateData);
             }
             else{
